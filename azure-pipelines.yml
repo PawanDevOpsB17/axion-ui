@@ -1,0 +1,19 @@
+trigger:
+ - main
+ - feature/*
+
+pool: Default
+
+
+stages:
+  - stage: BuildAndPush
+    displayName: Image Build and Push stage
+    jobs:
+      - job: BuildAndPush
+        displayName: Image Build and Push Job
+        steps:
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'acr-svc-conn'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
